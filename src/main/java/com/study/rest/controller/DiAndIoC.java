@@ -29,7 +29,7 @@ public class DiAndIoC {
     @Qualifier("newTestServiceImpl") // bean 객체가 2개가 있으므로 @Qualifier로 각 빈의 객체를 구분시켜 사용한다.
     private TestService testService2;
 
-    @ResponseBody // 응답하려는 본문의 내용을 가져다주는 어노테이션
+    @ResponseBody // 응답하려는 본문의 내용을 가져다주는 어노테이션 - > HTML 형식을 JSON 형식으로 보여주는 것
     @GetMapping("/di") // @getMapping을 사용하면 Controller가 특정 view의 화면을 사용자에게 보여줄 수 있게된다.
     public Object di() {
         // A가 B를 의존하는 관계

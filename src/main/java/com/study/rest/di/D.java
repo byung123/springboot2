@@ -2,7 +2,7 @@ package com.study.rest.di;
 
 import org.springframework.stereotype.Component;
 
-
+@Component
 public class D {
 
     public void dCall() {
