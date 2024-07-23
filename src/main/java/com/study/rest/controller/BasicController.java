@@ -1,5 +1,6 @@
 package com.study.rest.controller;
 
+import com.study.rest.dto.ReqProductDto;
 import com.study.rest.dto.ReqStudentDto;
 import com.study.rest.dto.ReqTeacherDto;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,35 @@ import org.springframework.web.bind.annotation.*;
 @RestController // 데이터만 요청하고 데이터만 응답받는 형태 (Responsebody 쓰기 귀찮아서 사용) - view리턴 안하는 것- JSON형태로 응답
                 // Controller + Responsebody 합쳐놓은것 -> 경로 타고 들어가면 보임)
 public class BasicController {
+
+    /**
+     * REST API
+     * 데이터 통신을 위한 HTTP 요청 방식
+     * HTTP(프로토콜)을 조금 더 잘 쓰기 위해서 정의된 개념
+     * 1. 요청에 대한 동작은 무조건 메소드에 따라 정의하자
+     *  - 데이터 추가(등록)은  POST 요청으로 하자. 그리고 post 요청은 JSON 데이터로 요청하자.
+     *  - 데이터 조회는 GET 요청으로 하자.
+     *      그리고 GET 요청은 QueryString(Params)으로 요청하자
+     *      예) 주소?key1=value&key2=value2 <- queryString 형태
+     *  - 데이터 수정은 PUT, Patch 요청으로 하자, JSON으로 요청하자
+     *      PUT 요청과 PATCH 요청의 차이점
+     *      * PUT 요청: 공백 또는 NULL인 데이터도 수정을 함.
+     *      * PATCH 요청: 공백 또는 NULL은 수정하지 않음. - 공백이나 NULL 데이터가 넘어오면 기존 데이터가 수정되지 않음 반대도 마찬가지
+     *      * 사실 둘다 공백과 NULL을 받을 수 있는데(둘다 같은 기능) 개발자끼리의 약속임(구별을 위한 목적).
+     *  - 데이터 삭제는 DELETE 요청으로 하자. params로 요청하자
+     * 2. 주소(URL) 요청 메세지(Resource) 자원 작성법
+     *  - URL은 가능한 동사를 사용하지 않는다
+     *  - 계층 구조로 작성한다.
+     *      예) /집/주방/가스레인지, /식당/주방/가스레인지
+     *  - 요청 메소드 마다 작성하는 방법이 다르다
+     *      예) 상품 등록(POST) /product
+     *          상품 하나(단건) 조회(GET) /product/1(id or key값)
+     *          상품 여러개(다건) 조회(GET) /products(전체), /products?page=2&count=30(한 페이지에 30개 조회)
+     *          상품 수정(PUT) /product/1(id, key) 1번 상품을 수정해라.
+     *          상품 삭제(DELETE) /product/1(id, key)
+     * 3. 주소는 가능한 대문자를 사용하지 않는다.
+     *
+     */
 
     @CrossOrigin
     @PostMapping("/basic/student")
@@ -28,5 +58,12 @@ public class BasicController {
     public ResponseEntity<?> basicPost2(@RequestBody ReqTeacherDto reqTeacherDto) {
         log.info("reqTeacher: {}", reqTeacherDto);
         return ResponseEntity.ok().body("잘 들어왔습니다.");
+    }
+
+    @CrossOrigin
+    @PostMapping("/basic/product")
+    public ResponseEntity<?> responseProduct(@RequestBody ReqProductDto reqProductDto) {
+        log.info("{}", reqProductDto);
+        return ResponseEntity.ok().body(null);
     }
 }
