@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.rest.repository.ProductMapper">
+    <insert id="save" parameterType="com.study.rest.entity.Product"> <!-- select만 return 타입있고, 나머지는 parameterType -->
+        Insert into product_tb
+        values
+            (0, #{productName}, #{price}, #{sizeId}, #{colorId}) <!-- Product 객체에서 쓰는 변수기 때문에, #{}은 문법 -->
+    </insert>
+</mapper>

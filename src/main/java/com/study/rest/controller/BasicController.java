@@ -1,9 +1,12 @@
 package com.study.rest.controller;
 
+import com.study.rest.dto.ProductDto;
 import com.study.rest.dto.ReqProductDto;
 import com.study.rest.dto.ReqStudentDto;
 import com.study.rest.dto.ReqTeacherDto;
+import com.study.rest.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController // 데이터만 요청하고 데이터만 응답받는 형태 (Responsebody 쓰기 귀찮아서 사용) - view리턴 안하는 것- JSON형태로 응답
                 // Controller + Responsebody 합쳐놓은것 -> 경로 타고 들어가면 보임)
 public class BasicController {
+
+    @Autowired
+    private ProductService productService;
 
     /**
      * REST API
@@ -61,9 +67,20 @@ public class BasicController {
     }
 
     @CrossOrigin
-    @PostMapping("/basic/product")
-    public ResponseEntity<?> responseProduct(@RequestBody ReqProductDto reqProductDto) {
-        log.info("{}", reqProductDto);
-        return ResponseEntity.ok().body(null);
+    @PostMapping("/api/v1/product")
+    public ResponseEntity<?> responseProduct(@RequestBody ProductDto.Register register)   {
+        return ResponseEntity.ok().body(productService.registerProduct(register));
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/v1/sizes")
+    public ResponseEntity<?> sizeListApi() {
+        return ResponseEntity.ok().body(productService.getSizeListAll());
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/v1/colors")
+    public ResponseEntity<?> colorListApi() {
+        return ResponseEntity.ok().body(productService.getColorListAll());
     }
 }
