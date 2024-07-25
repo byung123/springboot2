@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class CommonResponseDto { // 성공횟수 반환
+public class CommonResponseDto<T> { // 성공횟수 반환
     private String message;
     private int count;
     private boolean success;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ComputerServiceImpl {
@@ -64,6 +65,6 @@ public class ComputerServiceImpl {
                 .computerId(com.getComputerId())
                 .company(com.getCompany())
                 .build()
-        }.collect(Collectors.toList());
+        ).collect(Collectors.toList());
     }
 }
