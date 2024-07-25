@@ -5,7 +5,7 @@ import com.study.rest.entity.Color;
 
 import java.util.List;
 
-
+// 확장성을 생각해서 interface
 public interface ProductService {
         List<SizeDto.Info> getSizeListAll();
         List<Color> getColorListAll();
