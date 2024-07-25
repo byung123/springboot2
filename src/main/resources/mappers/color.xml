@@ -4,6 +4,11 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.study.rest.repository.ColorMapper"> <!-- repository있는걸 오버라이드 해줘야한다 -->
+    <insert id="save" parameterType="com.study.rest.entity.Color">
+        insert into color_tb
+        values
+            (0, #{colorName})
+    </insert>
     <!-- id가 method, resultType Entity로 잡아주면 알아서 같은 자료형으로 리턴해줌 -->
     <select id="findAll" resultType="com.study.rest.entity.Color">
         select
